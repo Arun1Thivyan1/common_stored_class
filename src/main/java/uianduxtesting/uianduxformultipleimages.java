@@ -36,7 +36,7 @@ import anfas.namereusable;
 import anfas.reusablekeyboardactions;
 import anfas.subclassforxpath;
 import anfas.wait_helper;
-import anfas_main_classes_for_all_modules.base_class;
+import anfas_main_classes_for_all_modules.Web_base_class;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
@@ -51,7 +51,7 @@ import ru.yandex.qatools.ashot.cropper.ImageCropper;
 
 import ru.yandex.qatools.ashot.cropper.indent.IndentCropper;
 
-public class uianduxformultipleimages extends base_class
+public class uianduxformultipleimages extends Web_base_class
 {
 	
 	

@@ -5,17 +5,20 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -34,7 +37,7 @@ import uianduxtesting.clean_the_images_in_the_folder;
 
 
 
-public class base_class 
+public class Web_base_class 
 {
 
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
@@ -42,7 +45,7 @@ public class base_class
     private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
 
     private static ExtentReports extent;
-    private static final Logger logger = LogManager.getLogger(base_class.class);
+    private static final Logger logger = LogManager.getLogger(Web_base_class.class);
 
     protected clean_the_images_in_the_folder cleaner = new clean_the_images_in_the_folder();
     
@@ -98,9 +101,7 @@ public class base_class
                 logger.info("Report sent to the team.");
                 
                 
-                // Call ZohoUploader to upload the Extent report file to Zoho
-//                ZohoUploader.uploadExtentReport();
-//                logger.info("Extent report uploaded to Zoho.");
+
                 
                 
                 
@@ -125,8 +126,29 @@ public class base_class
     // ---------------- CLASS LEVEL ------------------
 
     @BeforeClass
-    public void launchbrowser() throws InterruptedException 
+    
+    
+    //new
+    @Parameters({"browser", "viewport"})
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //old
+  //  public void launchbrowser() throws InterruptedException 
+    
+    
+    //new
+    public void launchbrowser(String browser,String viewport) throws InterruptedException 
+    
     {
+    	
+    	
         // Clean screenshots and diff images
         cleaner.cleanDirectory("/Users/apple/eclipse-workspace/all_pro_maj_flow_automation/difference_images");
         
@@ -137,24 +159,90 @@ public class base_class
         delete_old_screenshotimage_and_extend_report.deleteFilesInFolder("test-output");
 
         System.setProperty("file.encoding", "UTF-8");
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       //new 
+        
+        
+        if (browser.equalsIgnoreCase("chrome"))
+        {
+            System.setProperty("webdriver.chrome.driver", "/Users/apple/Downloads/chromedriver-mac-x64/chromedriver");
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--incognito");
+            driver.set(new ChromeDriver(options));
+            logger.info("Chrome browser launched.");
+        } 
+        else if (browser.equalsIgnoreCase("safari")) 
+        {
+            // Enable Safari's Allow Remote Automation in Safari > Develop menu
+            driver.set(new SafariDriver());
+            logger.info("Safari browser launched.");
+        } 
+        else 
+        {
+            throw new IllegalArgumentException("Invalid browser value: " + browser);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+     // ✅ Set viewport size if mobile
+        if (viewport.equalsIgnoreCase("mobile")) {
+            driver.get().manage().window().setSize(new Dimension(400, 800));
+            logger.info("Viewport set to mobile size: 400x800.");
+        } else {
+            driver.get().manage().window().maximize();
+            logger.info("Viewport set to full desktop size.");
+        }
 
-        // Set up WebDriver
         
         
-       
         
         
-        System.setProperty("webdriver.chrome.driver", "/Users/apple/Downloads/chromedriver-mac-x64/chromedriver");
         
         
-       // System.setProperty("webdriver.chrome.driver", "/Users/apple/Downloads/chromedriver-mac-x64/chromedriver");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
-
-        driver.set(new ChromeDriver(options));
-        driver.get().manage().window().maximize();
-        driver.get().get("https://demo.annztech.com/#/account/login");
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+ 
+        
+        /////make it dynamic//////
+        
+     
+        
+        driver.get().get("https://pms.annztech.com/");
+        
+    
+    
 
         wait.set(new WebDriverWait(driver.get(), Duration.ofSeconds(75)));
 
@@ -174,9 +262,9 @@ public class base_class
     @AfterClass
     public void teardown() 
     {
-        if (driver.get() != null) {
-            driver.get().quit();
-            logger.info("Browser closed.");
-        }
+//        if (driver.get() != null) {
+//            driver.get().quit();
+//            logger.info("Browser closed.");
+//        }
     }
 }

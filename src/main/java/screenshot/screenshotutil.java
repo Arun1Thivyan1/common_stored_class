@@ -35,24 +35,7 @@ public class screenshotutil
 	
 	
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -63,7 +46,7 @@ public class screenshotutil
         {
         	
         	
-        	driver.manage().window().maximize();
+        //	driver.manage().window().maximize();
             // Scroll to the bottom to ensure visibility of elements
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");

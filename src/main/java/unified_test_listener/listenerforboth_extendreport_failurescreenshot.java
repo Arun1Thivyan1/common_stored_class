@@ -12,10 +12,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
 import anfas.extendreport;
-import anfas_main_classes_for_all_modules.base_class;
+import anfas_main_classes_for_all_modules.Web_base_class;
 import screenshot.screenshotutil;
 
 public class listenerforboth_extendreport_failurescreenshot  implements ITestListener
+
 {
 	
 	
@@ -57,7 +58,7 @@ public class listenerforboth_extendreport_failurescreenshot  implements ITestLis
 	
 	        
 	        
-	        WebDriver driver = ((base_class) testClass).driver.get();
+	        WebDriver driver = ((Web_base_class) testClass).driver.get();
 	        
 	        //
 	        
@@ -126,7 +127,7 @@ public class listenerforboth_extendreport_failurescreenshot  implements ITestLis
 	 
 	        
 	        
-	        ExtentTest test = base_class.getExtentTest();
+	        ExtentTest test = Web_base_class.getExtentTest();
 	        
 	        
 	        
